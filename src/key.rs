@@ -201,6 +201,7 @@ impl PublicKey {
         ret
     }
 
+    #[inline]
     /// Serialize the key as a byte-encoded pair of values, in uncompressed form
     pub fn serialize_uncompressed(&self) -> [u8; constants::UNCOMPRESSED_PUBLIC_KEY_SIZE] {
         let secp = Secp256k1::with_caps(ContextFlag::None);
@@ -268,6 +269,12 @@ impl PublicKey {
                 Err(InvalidPublicKey)
             }
         }
+    }
+}
+
+impl Default for PublicKey {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -779,5 +786,3 @@ mod test {
         assert_eq!(sum1.unwrap(), exp_sum);
     }
 }
-
-

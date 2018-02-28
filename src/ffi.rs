@@ -274,4 +274,3 @@ extern "C" {
                           scalar: *const c_uchar)
                           -> c_int;
 }
-

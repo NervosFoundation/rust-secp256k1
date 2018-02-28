@@ -21,10 +21,11 @@
 #![deny(unused_mut)]
 #![warn(missing_docs)]
 
-extern crate gcc;
+extern crate cc;
 
 fn main() {
-    let mut base_config = gcc::Build::new();
+    println!("cargo:rerun-if-changed=build.rs");
+    let mut base_config = cc::Build::new();
     base_config.include("depend/secp256k1/")
                .include("depend/secp256k1/include")
                .include("depend/secp256k1/src")
@@ -47,4 +48,3 @@ fn main() {
                .file("depend/secp256k1/src/secp256k1.c")
                .compile("libsecp256k1.a");
 }
-

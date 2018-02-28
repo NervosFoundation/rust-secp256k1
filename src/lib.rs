@@ -283,9 +283,8 @@ impl RecoverableSignature {
         let mut ret = unsafe { ffi::RecoverableSignature::blank() };
 
         unsafe {
-            if data.len() != 64 {
-                Err(Error::InvalidSignature)
-            } else if ffi::secp256k1_ecdsa_recoverable_signature_parse_compact(secp.ctx, &mut ret,
+            if data.len() == 64
+                && ffi::secp256k1_ecdsa_recoverable_signature_parse_compact(secp.ctx, &mut ret,
                                                                                data.as_ptr(), recid.0) == 1 {
                 Ok(RecoverableSignature(ret))
             } else {
@@ -629,6 +628,12 @@ impl Secp256k1 {
         } else {
             Ok(())
         }
+    }
+}
+
+impl Default for Secp256k1 {
+    fn default() -> Self {
+        Self::new()
     }
 }
 
@@ -1052,4 +1057,3 @@ mod benches {
         });
     }
 }
-

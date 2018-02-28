@@ -45,7 +45,7 @@ macro_rules! impl_array_newtype {
         impl PartialEq for $thing {
             #[inline]
             fn eq(&self, other: &$thing) -> bool {
-                &self[..] == &other[..]
+                self[..] == other[..]
             }
         }
 
