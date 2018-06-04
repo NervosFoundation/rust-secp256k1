@@ -36,7 +36,7 @@
 #![cfg_attr(all(test, feature = "unstable"), feature(test))]
 #[cfg(any(test, feature = "rand"))]
 extern crate rand;
-#[cfg(any(test, feature = "rand"))]
+#[cfg(test)]
 extern crate rand_core;
 #[cfg(all(test, feature = "unstable"))]
 extern crate test;
